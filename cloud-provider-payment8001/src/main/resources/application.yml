@@ -19,14 +19,22 @@ spring:
       # 用来检测连接是否有效的 sql，要求是一个查询语句，常用 select 'x'。如果 validationQuery 为 null，
       # testOnBorrow、testOnReturn、testWhileIdle 都不会起作用。
       validation-query: select 1
-      #当前数据源操作类型
+      # 当前数据源操作类型
       type: com.alibaba.druid.pool.DruidDataSource
-      #mysql 驱动包
+      # mysql 驱动包
       driver-class-name: org.gjt.mm.mysql.Driver
-    url: jdbc:mysql://localhost:3306/cloud2020?useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: root
-    password: 6yhn^YHN
+    url: jdbc:mysql://10.169.169.181:3306/test1?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: esign
+    password: esign
 mybatis:
   mapperLocations: classpath:mapper/*.xml
-    #所有 entity 别名类所在包
-    type-aliases-package: com.atguigu.springcloud.entities
+  # 所有 entity 别名类所在包
+  type-aliases-package: com.b19g3r.cloud.entities
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      # 默认端口: 8761, 默认地址 htpp://localhost:8761/eureka
+      defaultZone: http://localhost:8761/eureka
