@@ -4,6 +4,11 @@ eureka:
   instance:
     hostname: service1
     prefer-ip-address: true
+  server:
+    # 表示注册中心是否开启服务的自我保护能力, 默认为 true
+    enable-self-preservation: true
+    # 表示 Eureka Server 清理无效节点的频率，默认 60000 毫秒（60 秒）
+    eviction-interval-timer-in-ms: 60000
   client:
     # false-不向注册中心注册自己
     register-with-eureka: false

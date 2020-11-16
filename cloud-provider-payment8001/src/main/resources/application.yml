@@ -32,6 +32,18 @@ mybatis:
   type-aliases-package: com.b19g3r.cloud.entities
 
 eureka:
+  instance:
+    # 表示实例在注册中心注册的唯一ID
+    instance-id: payment8001
+    # true: 实例以 IP 的形式注册, 默认false, 以hostname形式注册
+    prefer-ip-address: true
+    # 定义服务失效的时间，单位：秒
+    # 表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。
+    # 该值至少应该大于leaseRenewalIntervalInSeconds
+    lease-renewal-interval-in-seconds: 30
+    # 定义服务续约任务（心跳）的调用间隔，单位：秒 表示eureka client发送心跳给server端的频率。
+    # 如果在leaseExpirationDurationInSeconds后，server端没有收到client的心跳，则将摘除该instance。除此之外，如果该instance实现了HealthCheckCallback，并决定让自己unavailable的话，则该instance也不会接收到流量。
+    lease-expiration-duration-in-seconds: 90
   client:
     register-with-eureka: true
     fetch-registry: true

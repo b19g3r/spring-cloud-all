@@ -32,6 +32,9 @@ mybatis:
   type-aliases-package: com.b19g3r.cloud.entities
 
 eureka:
+  instance:
+    instance-id: payment8002
+    prefer-ip-address: true
   client:
     register-with-eureka: true
     fetch-registry: true
