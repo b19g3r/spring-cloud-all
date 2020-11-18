@@ -6,11 +6,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 自定义负载均衡算法
  * @author xingxuntao
  * @date 2020-11-04 18:46
  */
 @Configuration
 public class MySelfRule {
+
     @Bean
     public IRule myRule() {
         // 定义为随机

@@ -27,7 +27,11 @@ public class MyLB implements LoadBalancer {
         return next;
     }
 
-    //负载均衡算法：rest接口第几次请求数 % 服务器集群总数量 = 实际调用服务器位置下标  ，每次服务重启动后rest接口计数从1开始。
+    /**
+     * 负载均衡算法：rest接口第几次请求数 % 服务器集群总数量 = 实际调用服务器位置下标  ，每次服务重启动后rest接口计数从1开始。
+     * @author xingxuntao
+     * @date 2020-11-18 下午4:45
+     */
     @Override
     public ServiceInstance instances(List<ServiceInstance> serviceInstances) {
         int index = getAndIncrement() % serviceInstances.size();
