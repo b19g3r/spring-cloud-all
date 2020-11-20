@@ -1,0 +1,55 @@
+server:
+  port: 8005
+
+spring:
+  application:
+    name: cloud-payment-service
+  datasource:
+    druid:
+      # 默认 true 为 true 时 validationQuery 必须设为非空字符串
+      # 申请连接时执行 validationQuery 检测连接是否有效，做了这个配置会降低性能。
+      test-on-borrow: false
+      # 默认 false 为 true 时 validationQuery 必须设为非空字符串
+      # 【建议】配置为 true，不影响性能，并且保证安全性。申请连接的时候检测，
+      # 如果空闲时间大于 timeBetweenEvictionRunsMillis，执行 validationQuery 检测连接是否有效。
+      test-while-idle: true
+      # 默认 true 为 true 时 validationQuery 必须设为非空字符串
+      # 归还连接时执行 validationQuery 检测连接是否有效，做了这个配置会降低性能。
+      test-on-return: false
+      # 用来检测连接是否有效的 sql，要求是一个查询语句，常用 select 'x'。如果 validationQuery 为 null，
+      # testOnBorrow、testOnReturn、testWhileIdle 都不会起作用。
+      validation-query: select 1
+      # 当前数据源操作类型
+      type: com.alibaba.druid.pool.DruidDataSource
+      # mysql 驱动包
+      driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://10.169.169.181:3306/test1?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: esign
+    password: esign
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  # 所有 entity 别名类所在包
+  type-aliases-package: com.b19g3r.cloud.entities
+
+eureka:
+  instance:
+    # 表示实例在注册中心注册的唯一ID
+    instance-id: payment8001
+    # true: 实例以 IP 的形式注册, 默认false, 以hostname形式注册
+    prefer-ip-address: true
+    # 定义服务失效的时间，单位：秒
+    # 表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。
+    # 该值至少应该大于leaseRenewalIntervalInSeconds
+    lease-renewal-interval-in-seconds: 30
+    # 定义服务续约任务（心跳）的调用间隔，单位：秒 表示eureka client发送心跳给server端的频率。
+    # 如果在leaseExpirationDurationInSeconds后，server端没有收到client的心跳，则将摘除该instance。除此之外，如果该instance实现了HealthCheckCallback，并决定让自己unavailable的话，则该instance也不会接收到流量。
+    lease-expiration-duration-in-seconds: 90
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      # 默认端口: 8761, 默认地址 htpp://localhost:8761/eureka
+      # 单机版
+      # defaultZone: htpp://localhost:8761/eureka
+      # 集群版 注册所有的注册中心
+      defaultZone: http://service1:8761/eureka/, http://service2:8762/eureka/
